@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Repaso · Ciencias Sociales · Gimnasio Domingo Savio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ── RESET ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --c-bg:#0f1117;
+  --c-surface:#181c27;
+  --c-card:#1e2333;
+  --c-border:#2a3050;
+  --c-border-bright:#3d4870;
+  --c-text:#e8ebf5;
+  --c-muted:#8590b0;
+  --c-hint:#5c6585;
+
+  --c-blue:#4f8ef7;
+  --c-blue-dim:#1a2d5a;
+  --c-blue-glow:rgba(79,142,247,.18);
+  --c-green:#32d583;
+  --c-green-dim:#0d3d24;
+  --c-green-glow:rgba(50,213,131,.15);
+  --c-red:#f46060;
+  --c-red-dim:#3d1414;
+  --c-red-glow:rgba(244,96,96,.15);
+  --c-amber:#f5a623;
+  --c-amber-dim:#3d2800;
+  --c-purple:#a78bfa;
+  --c-purple-dim:#2d1f5e;
+  --c-teal:#22d3ee;
+  --c-teal-dim:#0c3040;
+
+  --g4:#a78bfa; --g4d:#2d1f5e; --g4g:rgba(167,139,250,.2);
+  --g5:#32d583; --g5d:#0d3d24; --g5g:rgba(50,213,131,.2);
+
+  --r:12px; --r-sm:8px; --r-lg:16px;
+  --shadow:0 4px 24px rgba(0,0,0,.4);
+  --font:'Plus Jakarta Sans',system-ui,sans-serif;
+}
+body{background:var(--c-bg);font-family:var(--font);color:var(--c-text);min-height:100vh;overflow-x:hidden}
+
+/* ── TOP BAR ── */
+.topbar{
+  background:linear-gradient(135deg,#131929 0%,#1a2040 100%);
+  border-bottom:1px solid var(--c-border);
+  padding:0 2rem;height:60px;display:flex;align-items:center;
+  justify-content:space-between;position:sticky;top:0;z-index:200;
+  backdrop-filter:blur(12px);
+}
+.topbar-logo{display:flex;align-items:center;gap:.75rem}
+.topbar-icon{width:36px;height:36px;border-radius:10px;
+  background:linear-gradient(135deg,var(--c-blue),var(--c-purple));
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.topbar-name{font-size:.95rem;font-weight:700;color:var(--c-text)}
+.topbar-sub{font-size:.72rem;color:var(--c-muted)}
+.topbar-badge{background:var(--c-blue-dim);color:var(--c-blue);
+  border:1px solid rgba(79,142,247,.3);padding:.25rem .75rem;
+  border-radius:20px;font-size:.75rem;font-weight:600}
+
+/* ── HERO ── */
+.hero{
+  background:linear-gradient(160deg,#131929 0%,#0f1117 60%);
+  padding:3rem 2rem 2rem;position:relative;overflow:hidden;
+  border-bottom:1px solid var(--c-border);
+}
+.hero::before{
+  content:'';position:absolute;top:-60px;right:-60px;
+  width:320px;height:320px;border-radius:50%;
+  background:radial-gradient(circle,rgba(79,142,247,.12) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero::after{
+  content:'';position:absolute;bottom:-80px;left:20%;
+  width:280px;height:280px;border-radius:50%;
+  background:radial-gradient(circle,rgba(167,139,250,.08) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-inner{max-width:860px;position:relative}
+.hero-eyebrow{font-size:.75rem;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--c-blue);margin-bottom:.75rem;
+  display:flex;align-items:center;gap:.5rem}
+.hero-eyebrow::before{content:'';display:inline-block;width:20px;height:2px;
+  background:var(--c-blue);border-radius:2px}
+.hero h1{font-size:2.2rem;font-weight:800;letter-spacing:-.5px;line-height:1.15;
+  background:linear-gradient(135deg,#e8ebf5 0%,#9ba8d0 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;margin-bottom:.6rem}
+.hero-desc{color:var(--c-muted);font-size:.95rem;line-height:1.6;max-width:520px}
+.hero-stats{display:flex;gap:1.5rem;margin-top:1.75rem;flex-wrap:wrap}
+.stat-chip{background:var(--c-card);border:1px solid var(--c-border);
+  border-radius:10px;padding:.6rem 1rem;display:flex;align-items:center;gap:.5rem}
+.stat-num{font-size:1.2rem;font-weight:800;color:var(--c-blue)}
+.stat-lbl{font-size:.78rem;color:var(--c-muted)}
+
+/* ── GRADE SWITCHER ── */
+.grade-switcher{display:flex;gap:0;padding:1.25rem 2rem .25rem;max-width:900px}
+.grade-tab{flex:0 0 auto;padding:.6rem 1.6rem;font-size:.875rem;font-weight:700;
+  cursor:pointer;border:1.5px solid var(--c-border);background:var(--c-surface);
+  color:var(--c-muted);transition:all .2s;position:relative}
+.grade-tab:first-child{border-radius:10px 0 0 10px}
+.grade-tab:last-child{border-radius:0 10px 10px 0}
+.grade-tab:hover{background:var(--c-card);color:var(--c-text)}
+.grade-tab.active[data-g="4"]{
+  background:var(--g4d);border-color:var(--g4);color:var(--g4);
+  box-shadow:0 0 20px var(--g4g)}
+.grade-tab.active[data-g="5"]{
+  background:var(--g5d);border-color:var(--g5);color:var(--g5);
+  box-shadow:0 0 20px var(--g5g)}
+
+/* ── TOPIC PILLS ── */
+.topic-rail{display:flex;gap:.5rem;padding:.75rem 2rem;flex-wrap:wrap;
+  border-bottom:1px solid var(--c-border);background:var(--c-surface)}
+.topic-pill{padding:.35rem 1rem;border-radius:20px;border:1px solid var(--c-border);
+  background:transparent;color:var(--c-muted);font-size:.8rem;font-weight:600;
+  cursor:pointer;transition:all .15s;font-family:var(--font);white-space:nowrap}
+.topic-pill:hover{background:var(--c-card);color:var(--c-text);border-color:var(--c-border-bright)}
+.topic-pill.active{background:var(--c-blue-dim);border-color:var(--c-blue);
+  color:var(--c-blue);box-shadow:0 0 12px var(--c-blue-glow)}
+
+/* ── SECTION CONTAINER ── */
+.grade-view{display:none}
+.grade-view.active{display:block}
+.content-wrap{padding:1.5rem 2rem 5rem;max-width:860px}
+
+/* ── SCORE BAR ── */
+.score-bar{
+  background:linear-gradient(135deg,var(--c-card),#1a2035);
+  border:1px solid var(--c-border);border-radius:var(--r-lg);
+  padding:1.25rem 1.5rem;margin-bottom:1.75rem;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;
+  position:relative;overflow:hidden;
+}
+.score-bar::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;
+  background:linear-gradient(90deg,rgba(79,142,247,.06),transparent);
+  width:200px;
+}
+.score-left{display:flex;align-items:center;gap:1rem}
+.score-ring{
+  width:56px;height:56px;border-radius:50%;
+  background:conic-gradient(var(--c-blue) 0deg, var(--c-border) 0deg);
+  display:flex;align-items:center;justify-content:center;position:relative;
+  transition:background .4s;
+}
+.score-ring::after{content:'';position:absolute;width:40px;height:40px;
+  border-radius:50%;background:var(--c-card)}
+.score-num{position:relative;z-index:1;font-size:.85rem;font-weight:800;color:var(--c-blue)}
+.score-info{flex:1}
+.score-label{font-size:.72rem;text-transform:uppercase;letter-spacing:1px;
+  color:var(--c-muted);font-weight:700;margin-bottom:.2rem}
+.score-display{font-size:1.5rem;font-weight:800;color:var(--c-text)}
+.score-display span{color:var(--c-blue)}
+.reset-btn{background:transparent;border:1px solid var(--c-border);color:var(--c-muted);
+  padding:.4rem 1rem;border-radius:8px;font-size:.78rem;font-weight:600;
+  cursor:pointer;font-family:var(--font);transition:all .15s}
+.reset-btn:hover{border-color:var(--c-red);color:var(--c-red)}
+
+/* ── TOPIC HEADER ── */
+.topic-header{margin-bottom:1.25rem}
+.topic-title{font-size:1.25rem;font-weight:800;letter-spacing:-.3px;
+  display:flex;align-items:center;gap:.6rem}
+.topic-title::before{content:'';display:inline-block;width:4px;height:22px;
+  border-radius:3px;background:var(--c-blue)}
+.topic-hint{font-size:.82rem;color:var(--c-muted);margin-top:.3rem;padding-left:1rem}
+
+/* ── ACTIVITY CARD ── */
+.act{
+  background:var(--c-card);border:1px solid var(--c-border);
+  border-radius:var(--r-lg);padding:1.5rem;margin-bottom:1.25rem;
+  transition:border-color .2s;position:relative;overflow:hidden;
+}
+.act::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  border-radius:var(--r-lg) var(--r-lg) 0 0;background:transparent;
+  transition:background .2s;
+}
+.act.answered::before{background:linear-gradient(90deg,var(--c-blue),var(--c-purple))}
+.act.answered-ok::before{background:linear-gradient(90deg,var(--c-green),#10b981)}
+.act.answered-err::before{background:linear-gradient(90deg,var(--c-red),#f97316)}
+
+.act-head{display:flex;align-items:center;gap:.6rem;margin-bottom:1rem}
+.act-badge{font-size:.68rem;font-weight:800;text-transform:uppercase;
+  letter-spacing:.8px;padding:.22rem .65rem;border-radius:20px}
+.badge-mc{background:var(--c-blue-dim);color:var(--c-blue);border:1px solid rgba(79,142,247,.25)}
+.badge-match{background:var(--c-amber-dim);color:var(--c-amber);border:1px solid rgba(245,166,35,.25)}
+.badge-order{background:var(--c-purple-dim);color:var(--c-purple);border:1px solid rgba(167,139,250,.25)}
+.badge-fill{background:var(--c-green-dim);color:var(--c-green);border:1px solid rgba(50,213,131,.25)}
+.badge-tf{background:var(--c-teal-dim);color:var(--c-teal);border:1px solid rgba(34,211,238,.25)}
+.act-num{font-size:.72rem;color:var(--c-hint);font-weight:600;margin-left:auto}
+
+.act-q{font-size:1rem;font-weight:600;line-height:1.6;color:var(--c-text)}
+
+/* ── MC OPTIONS ── */
+.opts{display:flex;flex-direction:column;gap:.5rem;margin-top:1rem}
+.opt{
+  display:flex;align-items:flex-start;gap:.75rem;padding:.75rem 1rem;
+  border:1.5px solid var(--c-border);border-radius:var(--r-sm);
+  cursor:pointer;transition:all .15s;background:var(--c-surface);
+}
+.opt:hover{border-color:var(--c-blue);background:var(--c-blue-dim);
+  transform:translateX(2px)}
+.opt-ltr{width:26px;height:26px;border-radius:6px;display:flex;
+  align-items:center;justify-content:center;font-size:.78rem;font-weight:800;
+  background:var(--c-border);color:var(--c-muted);flex-shrink:0;transition:all .15s}
+.opt-txt{font-size:.9rem;line-height:1.5;padding-top:2px}
+.opt.hover-state{border-color:var(--c-blue);background:rgba(79,142,247,.08)}
+.opt.correct{border-color:var(--c-green);background:var(--c-green-dim) !important;
+  box-shadow:0 0 16px var(--c-green-glow)}
+.opt.correct .opt-ltr{background:var(--c-green);color:#fff}
+.opt.wrong{border-color:var(--c-red);background:var(--c-red-dim) !important}
+.opt.wrong .opt-ltr{background:var(--c-red);color:#fff}
+.opt.show-correct{border-color:var(--c-green);background:var(--c-green-dim) !important;
+  box-shadow:0 0 16px var(--c-green-glow)}
+.opt.show-correct .opt-ltr{background:var(--c-green);color:#fff}
+
+/* ── FEEDBACK ── */
+.fb{display:none;margin-top:1rem;padding:.85rem 1.1rem;border-radius:var(--r-sm);
+  font-size:.875rem;line-height:1.55;position:relative;padding-left:2.8rem}
+.fb.show{display:block}
+.fb::before{position:absolute;left:1rem;top:.85rem;font-size:1rem}
+.fb.ok{background:var(--c-green-dim);color:#7eedc5;border:1px solid rgba(50,213,131,.25)}
+.fb.ok::before{content:'✅'}
+.fb.err{background:var(--c-red-dim);color:#faa;border:1px solid rgba(244,96,96,.25)}
+.fb.err::before{content:'❌'}
+.fb strong{font-weight:700;display:block;margin-bottom:.25rem}
+
+/* ── TF ── */
+.tf-wrap{display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap}
+.tf-btn{flex:1;min-width:120px;padding:.75rem 1rem;border-radius:var(--r-sm);
+  border:1.5px solid var(--c-border);background:var(--c-surface);
+  color:var(--c-text);font-size:.9rem;font-weight:700;cursor:pointer;
+  font-family:var(--font);transition:all .15s;display:flex;
+  align-items:center;justify-content:center;gap:.5rem}
+.tf-btn:hover{border-color:var(--c-teal);background:var(--c-teal-dim);color:var(--c-teal)}
+.tf-btn.ok-tf{border-color:var(--c-green);background:var(--c-green-dim);
+  color:var(--c-green);box-shadow:0 0 16px var(--c-green-glow)}
+.tf-btn.err-tf{border-color:var(--c-red);background:var(--c-red-dim);color:var(--c-red)}
+
+/* ── FILL ── */
+.fill-sentence{font-size:.95rem;line-height:2.4;margin-top:1rem;color:var(--c-text)}
+.blank-input{
+  border:none;border-bottom:2px solid var(--c-blue);background:rgba(79,142,247,.08);
+  color:var(--c-blue);font-size:.92rem;font-family:var(--font);font-weight:600;
+  padding:.1rem .5rem;min-width:90px;outline:none;border-radius:4px 4px 0 0;
+  transition:all .15s;
+}
+.blank-input:focus{background:var(--c-blue-dim);border-color:var(--c-purple)}
+.blank-input.ok-fill{border-color:var(--c-green);background:var(--c-green-dim);color:var(--c-green)}
+.blank-input.err-fill{border-color:var(--c-red);background:var(--c-red-dim);color:var(--c-red)}
+.wordbank{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.75rem}
+.wchip{padding:.3rem .75rem;background:var(--c-surface);border:1px solid var(--c-border-bright);
+  border-radius:20px;font-size:.8rem;font-weight:600;color:var(--c-muted);
+  cursor:pointer;transition:all .12s}
+.wchip:hover{background:var(--c-blue-dim);border-color:var(--c-blue);color:var(--c-blue)}
+.wchip.used{opacity:.3;pointer-events:none;text-decoration:line-through}
+.wbank-label{font-size:.72rem;text-transform:uppercase;letter-spacing:1px;
+  color:var(--c-hint);font-weight:700;margin-top:.75rem;margin-bottom:.25rem}
+
+/* ── MATCH ── */
+.match-cols{display:grid;grid-template-columns:1fr 1fr;gap:.5rem 1rem;margin-top:1rem}
+.col-hd{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;
+  color:var(--c-hint);margin-bottom:.4rem;display:flex;align-items:center;gap:.4rem}
+.col-hd::after{content:'';flex:1;height:1px;background:var(--c-border)}
+.mitem{
+  padding:.6rem .85rem;border:1.5px solid var(--c-border);border-radius:var(--r-sm);
+  font-size:.85rem;cursor:pointer;transition:all .15s;background:var(--c-surface);
+  min-height:46px;display:flex;align-items:center;line-height:1.4;
+}
+.mitem:hover{border-color:var(--c-border-bright);background:var(--c-card)}
+.mitem.sel-l{border-color:var(--c-blue);background:var(--c-blue-dim);color:var(--c-blue);font-weight:600}
+.mitem.paired{border-color:var(--c-green);background:var(--c-green-dim);
+  color:var(--c-green);font-weight:600;pointer-events:none;
+  box-shadow:0 0 10px var(--c-green-glow)}
+.mitem.wrong-flash{border-color:var(--c-red);background:var(--c-red-dim);
+  animation:shake .3s ease}
+.match-hint{font-size:.78rem;color:var(--c-hint);margin-top:.5rem;
+  display:flex;align-items:center;gap:.4rem}
+
+/* ── ORDER ── */
+.order-list{display:flex;flex-direction:column;gap:.45rem;margin-top:1rem}
+.oitem{
+  display:flex;align-items:center;gap:.75rem;padding:.7rem 1rem;
+  border:1.5px solid var(--c-border);border-radius:var(--r-sm);
+  background:var(--c-surface);cursor:grab;font-size:.875rem;
+  transition:all .15s;
+}
+.oitem:hover{border-color:var(--c-border-bright);background:var(--c-card)}
+.oitem.dragging{opacity:.4;transform:scale(.98)}
+.oitem.drag-over{border-color:var(--c-purple);background:var(--c-purple-dim);transform:translateY(-2px)}
+.oitem.correct-order{border-color:var(--c-green);background:var(--c-green-dim)}
+.oitem.wrong-order{border-color:var(--c-red);background:var(--c-red-dim)}
+.drag-icon{color:var(--c-hint);font-size:1.1rem;cursor:grab;flex-shrink:0}
+.onum{width:24px;height:24px;border-radius:6px;background:var(--c-border);
+  display:flex;align-items:center;justify-content:center;font-size:.75rem;
+  font-weight:800;color:var(--c-muted);flex-shrink:0;transition:all .15s}
+
+/* ── CHECK BTN ── */
+.check-btn{
+  margin-top:1rem;padding:.6rem 1.4rem;
+  background:linear-gradient(135deg,var(--c-blue),#6b8ef7);
+  color:#fff;border:none;border-radius:var(--r-sm);font-size:.875rem;
+  font-weight:700;cursor:pointer;font-family:var(--font);
+  transition:all .15s;box-shadow:0 4px 14px rgba(79,142,247,.3);
+}
+.check-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(79,142,247,.4)}
+.check-btn:active{transform:translateY(0)}
+.check-btn:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+@media(max-width:640px){
+  .hero h1{font-size:1.5rem}
+  .content-wrap{padding:1rem 1rem 5rem}
+  .hero{padding:2rem 1rem 1.5rem}
+  .match-cols{grid-template-columns:1fr}
+  .topbar{padding:0 1rem}
+  .topic-rail{padding:.6rem 1rem}
+  .grade-switcher{padding:1rem 1rem .25rem}
+  .tf-wrap{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="topbar">
+  <div class="topbar-logo">
+    <div class="topbar-icon">🏫</div>
+    <div>
+      <div class="topbar-name">Gimnasio Domingo Savio</div>
+      <div class="topbar-sub">Villavicencio · Ciencias Sociales</div>
+    </div>
+  </div>
+  <div class="topbar-badge">Primer Término 2026</div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Guía de Estudio Interactiva</div>
+    <h1>Practica antes<br>del examen 🎯</h1>
+    <p class="hero-desc">Preguntas, emparejamientos y ordenamientos para reforzar todos los temas de Ciencias Sociales. Selecciona tu grado y tema para comenzar.</p>
+    <div class="hero-stats">
+      <div class="stat-chip"><span class="stat-num">5</span><span class="stat-lbl">temas — Grado 4</span></div>
+      <div class="stat-chip"><span class="stat-num">6</span><span class="stat-lbl">temas — Grado 5</span></div>
+      <div class="stat-chip"><span class="stat-num">5</span><span class="stat-lbl">tipos de actividad</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- GRADE SWITCHER -->
+<div class="grade-switcher">
+  <button class="grade-tab active" data-g="4" onclick="switchGrade(4)">⬤ Cuarto grado</button>
+  <button class="grade-tab" data-g="5" onclick="switchGrade(5)">⬤ Quinto grado</button>
+</div>
+
+<!-- GRADO 4 -->
+<div id="g4" class="grade-view active">
+  <div class="topic-rail" id="tr4"></div>
+  <div class="content-wrap" id="cw4"></div>
+</div>
+
+<!-- GRADO 5 -->
+<div id="g5" class="grade-view">
+  <div class="topic-rail" id="tr5"></div>
+  <div class="content-wrap" id="cw5"></div>
+</div>
+
+<script>
+/* ══════════════════════════════════════════
+   DATA — ALL QUESTIONS ARE ORIGINAL
+   (same competencias as the exam, different wording/framing)
+══════════════════════════════════════════ */
+const D = {
+  4:{
+    topics:[
+      {id:"mapas",   lbl:"🗺️ Tipos de mapas y territorio"},
+      {id:"pobla",   lbl:"🌎 Primeros pobladores de América"},
+      {id:"precol",  lbl:"🏛️ Sociedades precolombinas"},
+      {id:"pisos",   lbl:"🏔️ Pisos térmicos"},
+      {id:"ciud4",   lbl:"🤝 Competencias ciudadanas"},
+    ],
+    acts:{
+      mapas:[
+        {type:"mc",
+         q:"Imagina que el Estado colombiano quiere construir un oleoducto subterráneo bajo los Andes para transportar petróleo. ¿Sobre cuál de las cinco dimensiones del territorio ejerce Colombia su soberanía exclusiva para autorizar o prohibir esa obra?",
+         opts:["El espacio aéreo, porque está relacionado con la atmósfera que rodea la cordillera.",
+               "El subsuelo, ya que Colombia tiene soberanía total sobre todo lo que se encuentra bajo la superficie de su territorio.",
+               "El espacio insular, porque las islas también tienen túneles subterráneos.",
+               "El espacio marítimo, ya que el petróleo eventualmente llega al mar."],
+         ans:1, exp:"El subsuelo es una de las cinco dimensiones territoriales de Colombia (junto con el continental, el marítimo, el insular y el espacio aéreo). Cualquier recurso o infraestructura bajo la superficie terrestre está bajo soberanía exclusiva del Estado colombiano."},
+
+        {type:"match",
+         q:"Conecta cada tipo de mapa con la pregunta que mejor responde.",
+         left:["Mapa físico","Mapa político","Mapa temático","Planisferio"],
+         right:["¿Cuál es el país más grande del mundo?","¿Dónde están las cordilleras y ríos de Colombia?","¿En qué departamentos hay más cultivos de café?","¿Cuáles son los límites entre Cundinamarca y Boyacá?"],
+         ans:[1,3,2,0],
+         exp:"Cada tipo de mapa tiene un propósito específico: el físico muestra el relieve natural, el político muestra límites administrativos, el temático un dato específico, y el planisferio muestra todo el mundo."},
+
+        {type:"tf",
+         q:"Un mapa político de Colombia puede ser útil para saber la altura de una montaña como el Nevado del Ruiz.",
+         ans:false,
+         exp:"FALSO. La altura de las montañas se lee en un mapa FÍSICO, no político. El mapa político muestra fronteras entre departamentos y municipios, no características del relieve."},
+
+        {type:"mc",
+         q:"Una estudiante necesita saber qué departamentos tienen más de 500.000 habitantes para un proyecto escolar. ¿Qué tipo de mapa le sirve mejor para encontrar esa información?",
+         opts:["Un mapa físico, porque muestra el relieve y el tamaño de cada departamento.",
+               "Un mapa temático de distribución de población, diseñado específicamente para representar datos estadísticos como la densidad demográfica.",
+               "Un planisferio, porque contiene información sobre todos los países del mundo.",
+               "Un mapa político, porque incluye los nombres de todos los departamentos."],
+         ans:1, exp:"El mapa temático es el indicado para representar un fenómeno específico como la distribución de la población. Usa colores, símbolos o números para mostrar datos estadísticos sobre un territorio."},
+
+        {type:"order",
+         q:"Ordena estas cinco dimensiones del territorio colombiano de menor a mayor altitud (desde el fondo hasta arriba).",
+         items:["Espacio aéreo: el cielo sobre el territorio colombiano",
+                "Subsuelo: todo lo que está bajo la superficie terrestre",
+                "Espacio insular: las islas como San Andrés y Gorgona",
+                "Espacio continental: la masa terrestre principal",
+                "Espacio marítimo: las aguas territoriales"],
+         correctOrder:[1,2,3,4,0],
+         exp:"De abajo hacia arriba: subsuelo → continental/insular/marítimo (mismo nivel) → espacio aéreo. El subsuelo es la capa más profunda; el aéreo, la más alta."},
+
+        {type:"mc",
+         q:"En un mapa de Colombia, el departamento del Chocó aparece en verde oscuro y el de Boyacá en marrón claro. Si se trata de un mapa físico, ¿qué comunica esa diferencia de colores?",
+         opts:["Que el Chocó tiene más biodiversidad que Boyacá.",
+               "Que el Chocó es más rico en minerales que Boyacá.",
+               "Que el Chocó tiene tierras bajas (más húmedas y tropicales) mientras Boyacá tiene una altitud mayor, representada con tonos marrones.",
+               "Que Boyacá tiene menos habitantes que el Chocó."],
+         ans:2, exp:"En un mapa físico, los colores codifican la altimetría: verde para zonas bajas, amarillo para altitudes intermedias, marrón para zonas más elevadas y blanco para nevados. Este sistema visual permite 'leer' el relieve sin visitar el lugar."},
+      ],
+
+      pobla:[
+        {type:"mc",
+         q:"Durante la última glaciación, el nivel del mar era mucho más bajo que hoy. ¿Cómo se relaciona ese dato con la llegada de los primeros humanos a América por el Estrecho de Bering?",
+         opts:["No tiene relación; los humanos llegaron en barcos de madera.",
+               "Al bajar el nivel del mar quedó expuesta tierra entre Asia y América, formando un corredor terrestre llamado Beringia, que desapareció cuando el hielo se derritió y el mar subió de nuevo.",
+               "El frío del glaciar creó un puente de hielo sólido flotante sobre el océano.",
+               "Los volcanes del fondo del mar formaron una isla temporal que sirvió de puente."],
+         ans:1, exp:"La caída del nivel del mar durante las glaciaciones expuso la plataforma continental del Estrecho de Bering, formando la llamada Beringia: un corredor terrestre de más de 1.000 km. Al terminar la glaciación y derretirse el hielo, el mar volvió a cubrirla."},
+
+        {type:"fill",
+         q:"Completa con el banco de palabras:",
+         sentence:"El período {0} fue el primero: los humanos vivían en grupos {1} que cazaban mamuts y recolectaban frutos. Luego, en el período {2}, el descubrimiento de la {3} les permitió producir su propio alimento y volverse {4}. Finalmente, en el período {5}, surgieron los primeros {6} con jerarquías y rituales religiosos.",
+         blanks:["Paleoindio","nómadas","Arcaico","agricultura","sedentarios","Formativo","cacicazgos"],
+         exp:"Este es el proceso de evolución cultural de los primeros americanos: de nómadas cazadores a agricultores sedentarios, y luego a sociedades organizadas políticamente."},
+
+        {type:"mc",
+         q:"Si los grupos del período Arcaico se volvieron sedentarios gracias a la agricultura, ¿por qué los del período Paleoindio tenían que moverse constantemente de un lugar a otro?",
+         opts:["Porque construían casas frágiles que se destruían fácilmente.",
+               "Porque sus líderes religiosos los obligaban a peregrinar.",
+               "Porque dependían de la caza y la recolección: si los animales se movían o los frutos se agotaban en un sitio, ellos debían seguirlos para sobrevivir.",
+               "Porque el clima glaciar hacía imposible quedarse en un mismo lugar por más de unos pocos días."],
+         ans:2, exp:"El nomadismo del Paleoindio era una estrategia de supervivencia: sin la capacidad de producir alimentos, las comunidades debían seguir a las manadas de animales y los ciclos de las plantas. La agricultura eliminó esa necesidad."},
+
+        {type:"match",
+         q:"Une cada período con su característica más importante.",
+         left:["Período Paleoindio","Período Arcaico","Período Formativo"],
+         right:["Aparecen los primeros cacicazgos, cultos religiosos y artesanía especializada","Grupos de cazadores y recolectores nómadas que usaban herramientas de piedra","Los grupos aprenden a cultivar y se establecen en comunidades permanentes"],
+         ans:[1,2,0],
+         exp:"Los tres grandes períodos del poblamiento americano representan etapas de complejidad creciente: subsistencia básica → sedentarismo agrícola → organización política y religiosa."},
+
+        {type:"tf",
+         q:"Las tres teorías de poblamiento de América (Bering, Pacífico y Antártida) plantean que todos los grupos llegaron al mismo lugar y en el mismo momento.",
+         ans:false,
+         exp:"FALSO. Cada ruta llevó a grupos distintos a diferentes partes del continente: la ruta de Bering a Norteamérica y Centroamérica, la del Pacífico a costas del Pacífico sur, y la antártica al extremo sur. Esto explica la diversidad de pueblos que habitaron América."},
+
+        {type:"mc",
+         q:"Si la ruta del Pacífico fue realizada en balsas rudimentarias desde islas oceánicas, ¿qué habilidad debían tener esos grupos que los diferenciaba de los que cruzaron Bering caminando?",
+         opts:["Debían ser muy rápidos corriendo para cruzar antes de que subiera el mar.",
+               "Debían tener conocimiento de navegación oceánica y construcción de embarcaciones, ya que su viaje fue marítimo, no terrestre.",
+               "Debían conocer técnicas agrícolas avanzadas para cultivar en alta mar.",
+               "Necesitaban armas sofisticadas para defenderse de animales marinos."],
+         ans:1, exp:"La ruta del Pacífico requería dominar la navegación a vela o remo por el océano abierto, lo que implica conocer el clima, las corrientes y cómo construir embarcaciones. Es una habilidad completamente distinta al viaje terrestre por Beringia."},
+      ],
+
+      precol:[
+        {type:"mc",
+         q:"En la sociedad muisca, los jeques (sacerdotes) ocupaban el tercer nivel de la pirámide, justo debajo del cacique local. ¿Qué función tenían los jeques que justificaba ese lugar tan alto en la jerarquía?",
+         opts:["Eran los mejores guerreros y defendían el territorio con las armas.",
+               "Eran intermediarios entre el mundo humano y el divino: realizaban rituales, conservaban el conocimiento sagrado y asesoraban al cacique en decisiones importantes.",
+               "Eran los más ricos porque controlaban el comercio de esmeraldas y sal.",
+               "Eran los maestros que enseñaban a los jóvenes las técnicas agrícolas."],
+         ans:1, exp:"En la sociedad muisca, como en muchas culturas antiguas, el poder religioso y el político estaban profundamente unidos. Los jeques (chamanes/sacerdotes) eran figuras de autoridad espiritual que nadie se atrevía a desafiar."},
+
+        {type:"tf",
+         q:"El Zipa era el líder político del norte del altiplano muisca y su sede de gobierno estaba en Tunja.",
+         ans:false,
+         exp:"FALSO. El Zipa gobernaba el SUR del altiplano desde Bogotá (Bacatá), representando a la luna (Chía). El Zaque era quien gobernaba el NORTE desde Tunja, representando al sol (Xue). Es un error muy común confundirlos."},
+
+        {type:"fill",
+         q:"Completa con el banco de palabras:",
+         sentence:"Los muiscas adoraban a {0} como creador supremo. {1} era la madre de la humanidad que emergió de una laguna. {2} era el dios civilizador que enseñó a los hombres a {3} y a tejer. Los tayronas construían sus templos con forma {4} en el centro de sus {5}.",
+         blanks:["Chimininagua","Bachué","Bochica","cultivar","circular","ciudades"],
+         exp:"Conocer las divinidades muiscas y las características tayronas permite entender cómo estas culturas organizaban su mundo espiritual, político y urbano."},
+
+        {type:"mc",
+         q:"Los tayronas organizaban su sociedad en cacicazgos y construían ciudades en las laderas de la Sierra Nevada de Santa Marta. ¿Qué conclusión se puede sacar de que sus templos circulares más grandes estuviesen siempre en el centro de las ciudades?",
+         opts:["Los templos se ponían al centro por razones de defensa militar.",
+               "El tamaño indica que se usaban principalmente para almacenar alimentos.",
+               "La posición central y el gran tamaño sugieren que la religión era el eje organizador de la vida tayrona: lo sagrado y lo político formaban un solo sistema.",
+               "Los tayronas simplemente imitaron la arquitectura de los muiscas."],
+         ans:2, exp:"En las culturas precolombinas, el espacio urbano refleja la jerarquía de valores. Que el templo sea el edificio más grande y más central dice que la dimensión religiosa era el corazón de la organización social y política tayrona."},
+
+        {type:"match",
+         q:"Une cada cultura precolombina con su rasgo más característico.",
+         left:["Muisca","Tayrona","San Agustín","Zenú"],
+         right:["Famosos por su orfebrería en oro y sus canales de drenaje en las sabanas","Organización piramidal con Zipa/Zaque; ricos en sal, esmeraldas y textiles","Ciudades escalonadas en la Sierra Nevada con templos circulares en el centro","Estatuas monumentales funerarias en el sur del país, aún sin descifrar totalmente"],
+         ans:[1,2,3,0],
+         exp:"Cada cultura precolombina colombiana desarrolló rasgos únicos adaptados a su entorno. Conocerlas permite entender la riqueza de la herencia cultural de Colombia antes de la llegada europea."},
+
+        {type:"mc",
+         q:"¿Por qué el estudio de las culturas precolombinas que desaparecieron (como los calima o los zenú en su forma original) es relevante para comprender la Colombia de hoy?",
+         opts:["No es relevante; esas culturas no dejaron ningún rastro en la actualidad.",
+               "Porque explica una parte de la identidad cultural colombiana y por qué la diversidad indígena actual es mucho menor que la que existía antes de la conquista española.",
+               "Porque esas culturas siguen existiendo exactamente igual que en el siglo XVI.",
+               "Porque sus técnicas agrícolas son las mismas que se usan hoy en todo el país."],
+         ans:1, exp:"La conquista española destruyó o transformó profundamente muchas culturas indígenas a través de enfermedades, violencia y asimilación forzada. Entender ese proceso explica la Colombia multicultural pero desigual que somos hoy."},
+      ],
+
+      pisos:[
+        {type:"match",
+         q:"Une cada cultivo o producto con el piso térmico donde se produce principalmente.",
+         left:["Banano y caña de azúcar","Café arábigo y flores","Papa y cebolla junca","Frailejones y espeletia","Nieve y hielo permanente"],
+         right:["Páramo (3.000–4.500 m): ecosistema de alta montaña","Piso cálido (0–1.000 m): temperaturas tropicales","Nieves perpetuas (+4.500 m): cumbres heladas","Piso frío (2.000–3.000 m): tubérculos andinos","Piso templado (1.000–2.000 m): clima ideal para el café"],
+         ans:[1,4,3,0,2],
+         exp:"La altitud determina la temperatura y, con ella, qué se puede cultivar. Esta es una de las grandes ventajas de Colombia: en pocas horas se puede pasar de clima tropical a glacial, lo que genera una biodiversidad y variedad agrícola únicas en el mundo."},
+
+        {type:"tf",
+         q:"El páramo colombiano es uno de los ecosistemas más importantes del mundo porque almacena grandes cantidades de agua dulce que alimentan los ríos y acuíferos del país.",
+         ans:true,
+         exp:"VERDADERO. Los páramos colombianos son llamados 'fábricas de agua': sus musgos, frailejones y suelos esponjosos capturan la humedad de las nubes y la liberan lentamente a los ríos. Colombia tiene el 50% de los páramos del mundo."},
+
+        {type:"mc",
+         q:"Una familia vive en Villavicencio (piedemonte llanero, ~500 m). Si viajan a Bogotá (2.600 m), ¿qué cambio en el clima y los cultivos pueden esperar ver en el camino?",
+         opts:["El clima se vuelve más caliente y húmedo; aparecen más plantaciones de banano.",
+               "El clima se va enfriando progresivamente; los cultivos de caña y banano desaparecen y son reemplazados por maíz, papa y cultivos de clima frío.",
+               "El clima y los cultivos son exactamente iguales porque los dos municipios están en la misma región.",
+               "El clima se vuelve desértico porque la cordillera bloquea toda la lluvia."],
+         ans:1, exp:"Al ascender desde Villavicencio (piso cálido) hacia Bogotá (piso frío), se pasa por el piso templado. Cada 1.000 metros de altura la temperatura baja aproximadamente 6°C, cambiando radicalmente el paisaje, la vegetación y los cultivos posibles."},
+
+        {type:"fill",
+         q:"Completa con el banco de palabras:",
+         sentence:"Colombia tiene cinco pisos térmicos. En el piso {0} (0-1.000 m) se cultiva {1}. En el piso {2} (1.000-2.000 m) se cultiva {3}. En el piso {4} (2.000-3.000 m) se cultiva papa. Más arriba está el {5}, y en las cimas más altas las {6} perpetuas.",
+         blanks:["cálido","banano","templado","café","frío","páramo","nieves"],
+         exp:"Memorizar la secuencia de pisos térmicos y sus cultivos típicos es fundamental para entender la geografía agrícola y climática de Colombia."},
+
+        {type:"mc",
+         q:"¿Por qué es tan importante para Colombia tener tantos pisos térmicos diferentes en un territorio relativamente pequeño?",
+         opts:["Porque dificulta la comunicación entre regiones y hace cada zona más independiente.",
+               "Porque obliga a importar alimentos de otros países al no poder cultivar todo en un mismo lugar.",
+               "Porque permite producir una enorme variedad de alimentos y cultivos sin necesidad de importarlos, genera biodiversidad excepcional y crea condiciones para intercambio comercial entre regiones.",
+               "Porque hace imposible construir carreteras entre ciudades de diferente altitud."],
+         ans:2, exp:"La diversidad de pisos térmicos es una ventaja competitiva única de Colombia: el país produce desde frutas tropicales hasta tubérculos andinos, pasando por café, cacao, flores y mucho más. Esta riqueza agrícola es consecuencia directa de su relieve."},
+      ],
+
+      ciud4:[
+        {type:"mc",
+         q:"La rama judicial del Estado colombiano está conformada por la Corte Suprema, el Consejo de Estado y la Corte Constitucional, entre otros. ¿Cuál es la función principal de esta rama que la diferencia de la legislativa y la ejecutiva?",
+         opts:["Crear las leyes que rigen al país.",
+               "Ejecutar y aplicar las políticas del gobierno.",
+               "Administrar justicia: interpretar las leyes, resolver conflictos y proteger los derechos de los ciudadanos.",
+               "Defender militarmente el territorio nacional."],
+         ans:2, exp:"En Colombia el poder está dividido en tres ramas: la Legislativa (hace las leyes, representada por el Congreso), la Ejecutiva (las aplica, representada por el Presidente) y la Judicial (administra justicia y protege derechos). Esta separación evita la concentración del poder."},
+
+        {type:"tf",
+         q:"Si un estudiante ve que la profesora castiga a todo el salón por el error de una sola persona, está presenciando una situación donde se respeta el principio de responsabilidad individual.",
+         ans:false,
+         exp:"FALSO. El principio de responsabilidad individual establece que cada persona responde solo por sus propias acciones, no por las de otros. Castigar a todos por el error de uno viola ese principio de justicia."},
+
+        {type:"mc",
+         q:"En el recreo, Mariana ve que dos compañeros están a punto de pelear. Ella se acerca y les dice con calma: 'Esperen, hablen primero. ¿Qué pasó?' ¿Qué competencia ciudadana está ejerciendo Mariana?",
+         opts:["Competencia destructiva, porque está metiéndose en los problemas de otros.",
+               "Competencia de mediación y resolución pacífica de conflictos, ya que busca que las partes dialoguen antes de que escale la violencia.",
+               "Competencia de denuncia, porque debería ir a buscar al rector inmediatamente.",
+               "Competencia de neutralidad, porque no toma partido por ninguno."],
+         ans:1, exp:"La mediación entre pares es una competencia ciudadana clave: involucra escucha activa, empatía y habilidades para transformar conflictos en diálogos. Mariana actúa como un agente de paz en su comunidad."},
+
+        {type:"match",
+         q:"Une cada situación con el valor ciudadano que representa o viola.",
+         left:["Todos votan en la elección del personero escolar","Un estudiante hace trampa en el examen","Un grupo limpia el parque del barrio sin que nadie se los pida","Alguien excluye a un compañero por su forma de vestir"],
+         right:["Vulneración de la diversidad y el respeto","Participación democrática","Responsabilidad y compromiso con lo público","Deshonestidad académica"],
+         ans:[1,3,2,0],
+         exp:"Reconocer valores y antivalores en situaciones cotidianas es el primer paso para actuar como un ciudadano íntegro. Las competencias ciudadanas se practican en la escuela, la familia y el barrio, no solo en espacios formales."},
+
+        {type:"mc",
+         q:"El artículo 44 de la Constitución establece que los niños tienen derecho a la educación, la salud y la recreación. Si un niño trabaja todo el día en lugar de ir al colegio, ¿cuál de esos derechos se está vulnerando principalmente?",
+         opts:["El derecho a la recreación, porque no puede jugar.",
+               "El derecho a la educación, ya que el trabajo infantil impide que el niño asista a la escuela y reciba formación.",
+               "El derecho a la salud, porque trabajar hace daño físico.",
+               "El derecho a la vivienda, porque puede quedarse sin hogar."],
+         ans:1, exp:"Aunque el trabajo infantil puede afectar varios derechos, el más directamente vulnerado cuando un niño trabaja en lugar de estudiar es el derecho a la educación. La Constitución establece que la educación es obligatoria hasta los 15 años y es responsabilidad del Estado y la familia garantizarla."},
+      ],
+    }
+  },
+
+  5:{
+    topics:[
+      {id:"mun",    lbl:"🌐 Modelo ONU (MUN)"},
+      {id:"estado", lbl:"⚖️ Estado Social de Derecho"},
+      {id:"divers", lbl:"🎭 Diversidad cultural"},
+      {id:"ambien", lbl:"🌿 Derechos humanos y ambiente"},
+      {id:"repub",  lbl:"🎺 Independencia y república"},
+      {id:"ciud5",  lbl:"🤝 Competencias ciudadanas"},
+    ],
+    acts:{
+      mun:[
+        {type:"mc",
+         q:"Un delegado de Colombia en el MUN quiere proponer que el comité haga una pausa de 20 minutos para que los países negocien en grupos pequeños. ¿Qué herramienta del MUN debe usar para hacer esa propuesta?",
+         opts:["Un Punto de Información, explicando al presidente del comité por qué se necesita la pausa.",
+               "Una Moción, porque está proponiendo una acción que modifica el curso del debate formal.",
+               "Un Papel de Trabajo, redactando la propuesta por escrito.",
+               "Un Discurso inaugural, abriendo su intervención con la petición de pausa."],
+         ans:1, exp:"Las Mociones son propuestas de acción que cambian el procedimiento del debate: abrir una lista de oradores, pasar a votación, hacer una pausa para negociar, etc. Los Puntos, en cambio, señalan errores o piden aclaraciones sin proponer cambios al debate."},
+
+        {type:"tf",
+         q:"En el MUN está permitido que un delegado diga: 'Yo personalmente creo que el cambio climático es el problema más urgente del mundo' para expresar la posición de su país.",
+         ans:false,
+         exp:"FALSO. En el MUN se usa siempre la tercera persona: 'Esta delegación considera...' o 'El país que representa esta delegación propone...'. Hablar en primera persona ('Yo creo') es un error procedimental porque el delegado representa a un país, no a sí mismo."},
+
+        {type:"order",
+         q:"Ordena las etapas del debate en un Modelo ONU, de la primera a la última.",
+         items:["Votación final para aprobar o rechazar el documento del comité",
+                "Apertura con discursos inaugurales de cada delegación",
+                "Redacción de Papeles de Trabajo con propuestas por escrito",
+                "Debate formal con Lista de Oradores: cada país expone su postura oficial",
+                "Negociación libre y consultas informales entre delegaciones"],
+         correctOrder:[1,3,4,2,0],
+         exp:"La 'Anatomía del Debate' en el MUN sigue este orden lógico: primero se presentan posiciones (apertura y debate formal), luego se negocia y se redactan propuestas, y finalmente se vota el documento que representa el consenso del comité."},
+
+        {type:"match",
+         q:"Une cada herramienta del MUN con su descripción correcta.",
+         left:["Moción de orden del día","Punto de información","Lista de Oradores","Papel de Trabajo","Documento final aprobado"],
+         right:["Texto preliminar con propuestas que puede convertirse en resolución si se aprueba","Solicitud para aclarar algo que no se entendió en el debate, sin proponer acciones","Registro del orden en que hablarán los delegados durante el debate formal","Propuesta para cambiar la agenda o el procedimiento del debate","Resolución oficial del comité que sintetiza los acuerdos alcanzados"],
+         ans:[3,1,2,0,4],
+         exp:"Dominar el vocabulario del MUN es esencial para participar efectivamente. Cada herramienta tiene un propósito específico dentro del reglamento que organiza el debate."},
+
+        {type:"mc",
+         q:"¿Por qué el debate formal con Lista de Oradores es el espacio más importante para que cada país establezca su postura oficial ante el comité?",
+         opts:["Porque es el único momento en que los delegados pueden hablar.",
+               "Porque las declaraciones hechas en la Lista de Oradores son públicas, formales y quedan registradas como la posición oficial del país representado.",
+               "Porque es obligatorio hablar en la Lista de Oradores para poder votar al final.",
+               "Porque en ese momento se puede negociar directamente con otros delegados."],
+         ans:1, exp:"El debate formal es el espacio diplomático oficial del MUN. Lo que un delegado dice allí representa la postura de su nación y es la base sobre la que los demás países decidirán si aliarse o negociar con él."},
+
+        {type:"mc",
+         q:"Un delegado está escuchando a otro hablar, pero nota que el presidente del comité no siguió el procedimiento correcto para abrir la sesión. ¿Qué herramienta del MUN debe usar para señalar ese error sin interrumpir el fondo del debate?",
+         opts:["Una Moción de votación inmediata.",
+               "Un Punto de Orden, que permite señalar un error procedimental sin debatir el tema de fondo.",
+               "Un Papel de Trabajo describiendo el error.",
+               "Un Discurso de réplica en la Lista de Oradores."],
+         ans:1, exp:"El Punto de Orden es la herramienta correcta para señalar errores en el procedimiento. A diferencia de las Mociones (que proponen acciones) o los Puntos de Información (que piden aclaraciones), el Punto de Orden interrumpe al orador para corregir algo que viola el reglamento."},
+      ],
+
+      estado:[
+        {type:"mc",
+         q:"Antes de la Constitución de 1991, Colombia tenía un Estado Liberal clásico. En ese modelo, un ciudadano pobre que no podía pagar atención médica simplemente no tenía acceso a ella. ¿Por qué el Estado Social de Derecho de 1991 cambió esa situación?",
+         opts:["Porque eliminó la propiedad privada y entregó los hospitales a los pobres.",
+               "Porque estableció que el Estado tiene la obligación activa de garantizar derechos sociales como la salud, la educación y la vivienda, sin importar la capacidad económica del ciudadano.",
+               "Porque prohibió que los hospitales cobraran por sus servicios.",
+               "Porque creó un impuesto especial para los ricos que financiara la salud de los pobres."],
+         ans:1, exp:"El Estado Social de Derecho no es solo 'no meterse': es gestión activa. El Estado debe crear condiciones para que todos los ciudadanos accedan a derechos básicos, actuando como garante de la dignidad humana, no solo como árbitro neutral."},
+
+        {type:"match",
+         q:"Relaciona cada artículo de la Constitución de 1991 con el pilar del Estado Social de Derecho que representa.",
+         left:["Art. 1: Colombia es un Estado Social de Derecho fundado en el respeto de la dignidad humana","Art. 13: Todas las personas nacen libres e iguales ante la ley","Art. 49: La salud es un servicio público que garantiza el Estado","Art. 2: Uno de los fines del Estado es garantizar la efectividad de los derechos"],
+         right:["Garantía de derechos sociales","Estado como gestor activo","Igualdad y libertad","Principio de dignidad humana"],
+         ans:[3,2,0,1],
+         exp:"La Constitución de 1991 es la base jurídica del Estado Social de Derecho en Colombia. Cada artículo refleja uno o más de sus pilares fundamentales y establece obligaciones concretas para el Estado."},
+
+        {type:"tf",
+         q:"El Estado Liberal clásico y el Estado Social de Derecho protegen exactamente los mismos tipos de derechos; solo cambia la forma en que lo hacen.",
+         ans:false,
+         exp:"FALSO. El Estado Liberal protegía principalmente derechos individuales (libertad, propiedad, expresión). El Estado Social de Derecho AMPLÍA eso al incluir derechos sociales, económicos y culturales (salud, educación, trabajo digno), que el Estado tiene obligación de garantizar activamente."},
+
+        {type:"fill",
+         q:"Completa con el banco de palabras:",
+         sentence:"La Constitución Política de {0} estableció a Colombia como un Estado {1} de {2}. A diferencia del Estado {3}, que solo protegía libertades individuales, el nuevo modelo obliga al Estado a ser {4} en la garantía de derechos como la {5}, la educación y el trabajo.",
+         blanks:["1991","Social","Derecho","Liberal","gestor","salud"],
+         exp:"La Constitución de 1991 fue un cambio profundo en la concepción del Estado colombiano: pasó de ser un árbitro pasivo a ser un garante activo de los derechos de todos sus ciudadanos."},
+
+        {type:"mc",
+         q:"¿Cuáles son los cuatro pilares que sostienen el modelo del Estado Social de Derecho en Colombia, según lo visto en clase?",
+         opts:["Economía, Ejército, Iglesia y Tradición.",
+               "Congreso, Presidente, Corte Constitucional y Procuraduría.",
+               "Igualdad/Libertad, Estado como Gestor, Garantía de Derechos Sociales y Principio Democrático.",
+               "Familia, Propiedad, Soberanía y Religión."],
+         ans:2, exp:"Estos cuatro pilares son el marco conceptual del Estado Social de Derecho. Sin cualquiera de ellos el modelo se debilita: sin democracia no hay legitimidad; sin igualdad no hay justicia; sin gestión estatal no se garantizan derechos; y sin derechos sociales, la libertad solo existe en el papel."},
+      ],
+
+      divers:[
+        {type:"mc",
+         q:"Colombia es un país pluriétnico y multicultural. ¿Cuáles son las tres grandes raíces culturales que se mezclaron para formar la identidad colombiana a lo largo de la historia?",
+         opts:["Azteca, Inca y Maya.",
+               "Asiática, Árabe y Europea.",
+               "Africana, Indígena y Europea (española principalmente), que convivieron y se fusionaron creando la diversidad cultural que hoy nos caracteriza.",
+               "Caribeña, Andina y Pacífica."],
+         ans:2, exp:"La identidad cultural colombiana es el resultado del encuentro —muchas veces violento— entre tres grandes tradiciones: las civilizaciones indígenas precolombinas, los colonizadores españoles europeos y los africanos traídos como esclavos. Esta mezcla (mestizaje) es la raíz de nuestra diversidad."},
+
+        {type:"tf",
+         q:"La diversidad cultural de Colombia se manifiesta únicamente en las diferencias entre los departamentos costeros y los andinos.",
+         ans:false,
+         exp:"FALSO. La diversidad cultural colombiana es mucho más amplia: existe entre regiones (Caribe, Andina, Pacífica, Orinoquía, Amazonía), dentro de las mismas regiones, entre comunidades indígenas distintas, entre comunidades afrodescendientes, entre zonas urbanas y rurales, y entre generaciones."},
+
+        {type:"match",
+         q:"Une cada expresión cultural con la región colombiana donde tiene mayor relevancia.",
+         left:["Carnaval de Barranquilla y cumbia","Carnaval de Negros y Blancos","Música de marimba y danza del currulao","Joropo y llanero","Gastronomía de bandeja paisa"],
+         right:["Región Andina (Antioquia)","Región del Pacífico (Chocó y Nariño)","Región Caribe","Orinoquía (Llanos Orientales)","Sur andino (Nariño)"],
+         ans:[2,4,1,3,0],
+         exp:"Las expresiones culturales de cada región son la huella de su historia, su gente y su entorno geográfico. Conocerlas es una forma de respetar y valorar la identidad de cada colombiano, sin importar de dónde venga."},
+
+        {type:"mc",
+         q:"Una estudiante le pregunta a su compañero por qué en Bogotá hay personas que hablan kamsá, wayuunaiki, emberá y español en el mismo barrio. ¿Cuál es la mejor explicación?",
+         opts:["Es un error: en Colombia solo se habla español.",
+               "Es consecuencia de la migración interna y el reconocimiento constitucional de las lenguas indígenas. Colombia tiene más de 65 lenguas nativas que son parte del patrimonio cultural de la nación.",
+               "Esos idiomas son dialectos regionales del español.",
+               "Solo los turistas extranjeros hablan esos idiomas en Bogotá."],
+         ans:1, exp:"La Constitución de 1991 reconoce que Colombia es plurilingüe: hay más de 65 lenguas indígenas y 2 lenguas criollas. La migración interna lleva a hablantes de esas lenguas a las ciudades. La diversidad lingüística es parte de la riqueza cultural colombiana."},
+
+        {type:"fill",
+         q:"Completa con el banco de palabras:",
+         sentence:"La identidad colombiana tiene tres raíces: la {0}, la {1} y la {2}. Esta mezcla se llama {3}. La Constitución de 1991 reconoce a Colombia como una nación {4} y {5}, lo que significa que el Estado debe proteger todas las expresiones culturales del país.",
+         blanks:["indígena","europea","africana","mestizaje","pluriétnica","multicultural"],
+         exp:"Estos conceptos son fundamentales para comprender la identidad colombiana y el fundamento constitucional de la protección de la diversidad cultural en el país."},
+      ],
+
+      ambien:[
+        {type:"mc",
+         q:"Si el aire limpio, el agua, los suelos, los ecosistemas y el clima estable son los cinco elementos de un ambiente sano, ¿qué pasa cuando una fábrica contamina el río del que bebe una comunidad?",
+         opts:["Solo se afecta el elemento 'agua', los demás quedan intactos.",
+               "Se afecta uno de los cinco elementos, pero dado que todos están interconectados, la contaminación del agua puede degradar los suelos, matar ecosistemas y afectar la salud humana.",
+               "No pasa nada relevante porque el río se purifica solo.",
+               "Solo se afecta la salud de los peces, no la de las personas."],
+         ans:1, exp:"Los cinco elementos del ambiente sano son interdependientes: contaminar el agua afecta los suelos ribereños, destruye ecosistemas acuáticos, impacta el clima local y pone en riesgo la salud humana. El ambiente es un sistema, no una colección de piezas separadas."},
+
+        {type:"order",
+         q:"Ordena el ciclo que desencadenó el 'despertar ecologista moderno', del evento inicial a la consecuencia final.",
+         items:["Reacción social: movimientos ambientalistas, protestas y presión política",
+                "Explotación masiva de recursos naturales por la industrialización",
+                "Impacto visible: ríos muertos, cielos contaminados, especies extinguidas",
+                "Saturación: los ecosistemas ya no pueden absorber tantos residuos"],
+         correctOrder:[1,3,2,0],
+         exp:"Este ciclo explica por qué surgió el movimiento ecologista en los años 60 y 70: la industria explotó los recursos, los residuos saturaron la naturaleza, los daños se hicieron visibles y la sociedad reaccionó exigiendo cambios."},
+
+        {type:"match",
+         q:"Une cada problema ambiental cercano con la categoría de contaminación a la que pertenece.",
+         left:["Humo negro de los buses en el centro de la ciudad","Música a alto volumen hasta la madrugada en el barrio","Fertilizantes y pesticidas que llegan al río desde una finca","Basura plástica arrojada al caño del barrio"],
+         right:["Contaminación hídrica","Contaminación del aire (atmosférica)","Contaminación sonora","Contaminación visual y del agua"],
+         ans:[1,2,0,3],
+         exp:"Identificar los tipos de contaminación en nuestro entorno inmediato es el primer paso para actuar. El lema 'piensa global, actúa local' empieza por reconocer los problemas del propio barrio."},
+
+        {type:"tf",
+         q:"El lema 'piensa global, actúa local' significa que debemos esperar a que los gobiernos internacionales solucionen los problemas ambientales antes de hacer algo en nuestro barrio.",
+         ans:false,
+         exp:"FALSO. El lema significa exactamente lo contrario: entender el impacto global de los problemas (cambio climático, extinción de especies) pero actuar desde nuestra escala local (reciclar, ahorrar agua, no contaminar). La suma de acciones locales genera el cambio global."},
+
+        {type:"mc",
+         q:"La visión del 'futuro' que propone la educación ambiental plantea que los humanos deben ser 'guardianes del planeta'. ¿Qué implica ese cambio de rol respecto al modelo del 'pasado'?",
+         opts:["Que debemos dejar de usar cualquier recurso natural.",
+               "Que el planeta no necesita que lo cuidemos.",
+               "Que pasamos de ver la naturaleza como un recurso ilimitado para explotar (dueños) a entenderla como un patrimonio finito que debemos preservar para las generaciones futuras (guardianes).",
+               "Que solo los científicos tienen responsabilidad sobre el cuidado del ambiente."],
+         ans:2, exp:"Este cambio de mentalidad es el núcleo de la educación ambiental: del extractivismo (tomar sin límite) a la sostenibilidad (usar sin comprometer el futuro). Todos, desde un niño hasta un presidente, tienen responsabilidad en este cambio."},
+      ],
+
+      repub:[
+        {type:"mc",
+         q:"Los criollos (hijos de españoles nacidos en América) tenían riqueza, educación e influencia social, pero no podían ocupar los cargos políticos más importantes del virreinato. ¿Cómo influyó esa frustración en los eventos del 20 de julio de 1810?",
+         opts:["No influyó; los criollos apoyaban plenamente al rey de España.",
+               "Los criollos organizaron deliberadamente un incidente el 20 de julio para justificar la creación de una Junta de Gobierno local que ellos pudieran controlar, canalizando su descontento en acción política.",
+               "Los criollos se enfrentaron militarmente a los españoles en la Plaza Mayor.",
+               "Los criollos firmaron un tratado de paz con la Corona española."],
+         ans:1, exp:"La independencia fue un proyecto político de las élites criollas, no una revuelta popular espontánea. El incidente del florero fue un pretexto calculado para legitimar la creación de una junta local que les diera el poder político que la Corona les negaba."},
+
+        {type:"tf",
+         q:"Los Federalistas, liderados por Santander, querían un gobierno central fuerte con sede en Bogotá que controlara todas las provincias del país.",
+         ans:false,
+         exp:"FALSO. Los CENTRALISTAS (Bolívar) querían el gobierno central fuerte. Los FEDERALISTAS (Santander) querían lo contrario: que cada región tuviera autonomía y un gobierno propio, siguiendo el modelo de Estados Unidos. Esta diferencia generó conflictos profundos en el siglo XIX colombiano."},
+
+        {type:"order",
+         q:"Ordena estos eventos de la independencia colombiana del más antiguo al más reciente.",
+         items:["Proclamación de la Independencia absoluta (1813, algunas provincias)",
+                "El incidente del florero y creación de la Primera Junta de Gobierno (1810)",
+                "Reconquista española: el 'Régimen del Terror' de Morillo (1816)",
+                "Batalla de Boyacá: derrota definitiva del ejército español (1819)",
+                "Patria Boba: conflictos entre centralistas y federalistas (1810-1816)"],
+         correctOrder:[1,4,0,2,3],
+         exp:"La independencia no fue un solo evento sino un proceso de más de 10 años, lleno de conflictos internos y retrocesos. Conocer esta cronología ayuda a entender por qué el 7 de agosto (Batalla de Boyacá) es tan importante como el 20 de julio."},
+
+        {type:"match",
+         q:"Une cada personaje de la independencia con su posición o aporte.",
+         left:["Simón Bolívar","Francisco de Paula Santander","Antonio Nariño","Antonio José de Sucre"],
+         right:["Militar venezolano-colombiano que liberó varios países de América del Sur","Traductor y difusor de los Derechos del Hombre; precursor de la independencia","General neogranadino; defensor del federalismo y la ley; 'Hombre de las Leyes'","Líder centralista; el 'Libertador'; venció en la Batalla de Boyacá"],
+         ans:[3,2,1,0],
+         exp:"Conocer los actores de la independencia permite entender que fue un proceso protagonizado por personas reales con ideas, ambiciones y contradicciones, no un mito unidimensional."},
+
+        {type:"mc",
+         q:"Después de la independencia en 1819, ¿por qué la nueva República de Colombia (la Gran Colombia) se enfrentó a tantos conflictos internos entre sus propios líderes?",
+         opts:["Porque España siguió atacando militarmente durante 50 años más.",
+               "Porque los líderes tenían visiones profundamente distintas sobre cómo debía organizarse el Estado: centralismo vs. federalismo, religión vs. separación de poderes, etc.",
+               "Porque todos los líderes querían ser el único rey de la nueva nación.",
+               "Porque no había suficiente dinero para pagar a los soldados del ejército libertador."],
+         ans:1, exp:"La independencia resolvió el problema de quién gobernaba (ya no España), pero no resolvió cómo gobernar. Las diferencias ideológicas entre centralistas y federalistas, y entre facciones políticas, generaron décadas de inestabilidad y guerras civiles."},
+      ],
+
+      ciud5:[
+        {type:"mc",
+         q:"Una campaña escolar pide escribir un mensaje que convenza a los estudiantes de respetar las mascotas del barrio. ¿Cuál de estos mensajes comunica mejor el valor del cuidado animal?",
+         opts:["Los animales callejeros son un riesgo de salud pública. ¡Reportémoslos!",
+               "Las mascotas nos alegran la vida con su compañía y fidelidad. Si ellas nos cuidan, ¡cuidémoslas también!",
+               "Los perros y gatos pueden servir para la seguridad del hogar. ¡Entrenémoslos!",
+               "Los animales tienen valor económico como mascotas de raza. ¡Invirtiamos en ellos!"],
+         ans:1, exp:"El mensaje B conecta la relación afectiva con el animal (nos cuidan) con la reciprocidad del cuidado (cuidémoslas). Es el único que apela genuinamente a la empatía y el respeto como valores, que son la base de una campaña de defensa animal."},
+
+        {type:"mc",
+         q:"Un papá le enseña a su hijo sobre cuidado ambiental: no botar basura, no desperdiciar agua. Camino al colegio, el niño ve un letrero en un negocio que contradice uno de esos consejos. ¿Cuál de estos negocios contradice específicamente el consejo de no desperdiciar agua?",
+         opts:["Una ferretería que vende herramientas para el hogar.",
+               "Una tienda de helados con muchos sabores.",
+               "Un lavadero de carros que usa mangueras a presión con agua corriente sin control.",
+               "Una librería con muchos libros de texto."],
+         ans:2, exp:"El lavadero de carros con mangueras a presión es el que más directamente contradice el ahorro de agua. Usa grandes cantidades de agua potable para una actividad no esencial, en contraste con el mensaje de uso responsable del recurso hídrico."},
+
+        {type:"tf",
+         q:"Cuando Ricardo grita en público que Jaime 'es el cochino del salón' y algunos compañeros se alejan de Jaime, el daño principal es el insulto de Ricardo, no las reacciones de los compañeros.",
+         ans:false,
+         exp:"FALSO. El alejamiento de los compañeros cercanos es probablemente el daño más profundo porque convierte el insulto verbal en exclusión social real. La validación no verbal del grupo amplifica el daño del bullying y hace que Jaime se sienta rechazado por toda la comunidad, no solo por una persona."},
+
+        {type:"mc",
+         q:"Juan Andrés se levanta de mal humor casi todos los días. Su papá le propone acostarse una hora antes. ¿Qué nos dice esta situación sobre la forma en que el papá identifica y aborda el problema?",
+         opts:["El papá no entiende el problema: el mal humor no tiene nada que ver con el sueño.",
+               "El papá actúa intuitivamente: identifica que la causa probable del mal humor es el cansancio y propone una solución directa que ataca la raíz del problema.",
+               "El papá quiere que su hijo sea más obediente.",
+               "El papá no confía en su hijo y quiere controlarlo."],
+         ans:1, exp:"El papá usa pensamiento causal: conecta el efecto observable (mal humor al levantarse) con una causa probable (falta de sueño) y propone una intervención directa (dormir más). Esta es exactamente la forma en que se deben resolver problemas en la vida cotidiana."},
+
+        {type:"mc",
+         q:"En una elección estudiantil, los estudiantes deben elegir un personero. ¿Qué criterios debería usar el estudiante para elegir al mejor candidato, en lugar de simplemente votar por el más popular?",
+         opts:["Elegir al que sea el mejor amigo o compañero de grupo.",
+               "Elegir al que tenga las propuestas más claras, haya demostrado compromiso con el bienestar del colegio y tenga capacidad para representar a todos los estudiantes, no solo a su grupo.",
+               "Elegir al más popular porque eso garantiza que los profesores lo respetarán.",
+               "Elegir al que prometa dar más permisos y menos tareas."],
+         ans:1, exp:"La democracia representativa funciona bien cuando los ciudadanos eligen con base en propuestas, trayectoria y capacidades, no en popularidad o beneficios personales. Aprender a votar con criterio en el colegio es entrenar para la ciudadanía adulta."},
+
+        {type:"match",
+         q:"Une cada situación cotidiana con la competencia ciudadana que se necesita para manejarla correctamente.",
+         left:["Dos amigos tienen una discusión y uno de ellos te pide que lo ayudes a resolver el conflicto","Notas que en tu colegio hay una regla injusta que afecta a todos los estudiantes","Un compañero hace un comentario racista sobre otro estudiante","Quieres proponer una campaña ambiental en tu colegio"],
+         right:["Participación y liderazgo cívico","Mediación y resolución pacífica de conflictos","Rechazo activo a la discriminación y defensa de la dignidad","Uso de mecanismos institucionales (personero, gobierno escolar)"],
+         ans:[1,3,2,0],
+         exp:"Las competencias ciudadanas no son abstractas: tienen aplicaciones directas en las situaciones del día a día. Identificar qué competencia usar en cada momento es parte de la formación para vivir en sociedad."},
+      ],
+    }
+  }
+};
+
+/* ══════════════════════════════════════════
+   STATE
+══════════════════════════════════════════ */
+let ST = {
+  grade:4,
+  topic4:"mapas",
+  topic5:"mun",
+  scores:{4:{ok:0,tot:0},5:{ok:0,tot:0}},
+};
+let matchSel = {};
+
+/* ══════════════════════════════════════════
+   BOOT
+══════════════════════════════════════════ */
+function boot(){
+  buildNav(4); buildNav(5);
+  render(4,ST.topic4); render(5,ST.topic5);
+}
+
+function buildNav(g){
+  document.getElementById('tr'+g).innerHTML =
+    D[g].topics.map(t=>`<button class="topic-pill${ST['topic'+g]===t.id?' active':''}"
+      onclick="switchTopic(${g},'${t.id}')">${t.lbl}</button>`).join('');
+}
+
+function switchGrade(g){
+  ST.grade=g;
+  document.querySelectorAll('.grade-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelector(`.grade-tab[data-g="${g}"]`).classList.add('active');
+  document.getElementById('g4').classList.toggle('active',g===4);
+  document.getElementById('g5').classList.toggle('active',g===5);
+}
+
+function switchTopic(g,tid){
+  ST['topic'+g]=tid;
+  buildNav(g);
+  render(g,tid);
+}
+
+/* ══════════════════════════════════════════
+   RENDER
+══════════════════════════════════════════ */
+function render(g,tid){
+  const sc=ST.scores[g];
+  const acts=D[g].acts[tid];
+  const topicLbl=D[g].topics.find(t=>t.id===tid).lbl;
+
+  let h=`
+    <div class="score-bar" id="sb${g}">
+      <div class="score-left">
+        <div class="score-ring" id="ring${g}">
+          <span class="score-num" id="rnum${g}">–</span>
+        </div>
+        <div class="score-info">
+          <div class="score-label">Puntaje acumulado</div>
+          <div class="score-display"><span id="sdisp${g}">${sc.ok}</span> / ${sc.tot} correctas</div>
+        </div>
+      </div>
+      <button class="reset-btn" onclick="resetScore(${g})">↺ Reiniciar</button>
+    </div>
+    <div class="topic-header">
+      <div class="topic-title">${topicLbl}</div>
+      <div class="topic-hint">Resuelve cada actividad — selecciona, arrastra o escribe tu respuesta.</div>
+    </div>
+  `;
+
+  acts.forEach((a,i)=>{h+=buildAct(a,g,tid,i);});
+  document.getElementById('cw'+g).innerHTML=h;
+  updateRing(g);
+
+  acts.forEach((a,i)=>{
+    const id=`${g}_${tid}_${i}`;
+    if(a.type==='match') initMatch(id,a);
+    if(a.type==='order') initOrder(id,a);
+  });
+}
+
+/* ── Build one activity ── */
+function buildAct(a,g,tid,i){
+  const id=`${g}_${tid}_${i}`;
+  const bMap={mc:'badge-mc',match:'badge-match',order:'badge-order',fill:'badge-fill',tf:'badge-tf'};
+  const lMap={mc:'Selección múltiple',match:'Emparejamiento',order:'Ordenamiento',fill:'Completar',tf:'Verdadero / Falso'};
+  let body='';
+  if(a.type==='mc')    body=buildMC(a,id);
+  if(a.type==='tf')    body=buildTF(a,id);
+  if(a.type==='fill')  body=buildFill(a,id);
+  if(a.type==='match') body=buildMatch(a,id);
+  if(a.type==='order') body=buildOrder(a,id);
+  return `<div class="act" id="act_${id}">
+    <div class="act-head">
+      <span class="act-badge ${bMap[a.type]}">${lMap[a.type]}</span>
+      <span class="act-num">Actividad ${i+1}</span>
+    </div>
+    <div class="act-q">${a.q}</div>
+    ${body}
+    <div class="fb" id="fb_${id}"></div>
+  </div>`;
+}
+
+function buildMC(a,id){
+  const L=['A','B','C','D'];
+  // Shuffle options while tracking where the correct answer lands
+  const indexed = a.opts.map((o,i)=>({t:o,oi:i}));
+  // Fisher-Yates shuffle
+  for(let k=indexed.length-1;k>0;k--){
+    const j=Math.floor(Math.random()*(k+1));
+    [indexed[k],indexed[j]]=[indexed[j],indexed[k]];
+  }
+  const newAns = indexed.findIndex(x=>x.oi===a.ans);
+  return `<div class="opts">${indexed.map((o,i)=>`
+    <div class="opt" id="op_${id}_${i}" onclick="clickMC('${id}',${i},${newAns})">
+      <div class="opt-ltr">${L[i]}</div>
+      <div class="opt-txt">${o.t}</div>
+    </div>`).join('')}</div>`;
+}
+
+function buildTF(a,id){
+  return `<div class="tf-wrap">
+    <button class="tf-btn" id="tf_${id}_t" onclick="clickTF('${id}',true,${a.ans})">✔ Verdadero</button>
+    <button class="tf-btn" id="tf_${id}_f" onclick="clickTF('${id}',false,${a.ans})">✘ Falso</button>
+  </div>`;
+}
+
+function buildFill(a,id){
+  let sent=a.sentence;
+  a.blanks.forEach((b,i)=>{
+    sent=sent.replace(`{${i}}`,`<input class="blank-input" id="bi_${id}_${i}" placeholder="___" style="width:${Math.max(80,b.length*11)}px" autocomplete="off">`);
+  });
+  // Shuffle the word bank display order (chips) without changing blank IDs
+  const chipOrder = a.blanks.map((_,i)=>i);
+  for(let k=chipOrder.length-1;k>0;k--){
+    const j=Math.floor(Math.random()*(k+1));
+    [chipOrder[k],chipOrder[j]]=[chipOrder[j],chipOrder[k]];
+  }
+  const chips=chipOrder.map(ci=>`<span class="wchip" id="wc_${id}_${ci}" onclick="useChip('${id}',${ci},'${a.blanks[ci]}')">${a.blanks[ci]}</span>`).join('');
+  return `<div class="fill-sentence">${sent}</div>
+    <div class="wbank-label">Banco de palabras</div>
+    <div class="wordbank">${chips}</div>
+    <button class="check-btn" id="cbf_${id}" onclick="checkFill('${id}',${JSON.stringify(a.blanks)})">Verificar respuesta</button>`;
+}
+
+function buildMatch(a,id){
+  // Shuffle right column ensuring no item ends up directly opposite its correct pair
+  let shuffled;
+  const maxTries = 50;
+  for(let attempt=0; attempt<maxTries; attempt++){
+    shuffled = [...a.right.map((r,i)=>({t:r,oi:i}))].sort(()=>Math.random()-.5);
+    // Check: no shuffled[i] should be the correct match for left[i]
+    const hasDirectMatch = shuffled.some((r,i)=> a.ans[i] === r.oi);
+    if(!hasDirectMatch) break;
+  }
+  window['MD_'+id]={left:a.left,rs:shuffled,ans:a.ans,pairs:[],selL:null};
+  const leftH=a.left.map((l,i)=>`<div class="mitem" id="ml_${id}_${i}" onclick="pickL('${id}',${i})">${l}</div>`).join('');
+  const rightH=shuffled.map((r,i)=>`<div class="mitem" id="mr_${id}_${i}" onclick="pickR('${id}',${i})">${r.t}</div>`).join('');
+  return `<p class="match-hint">👆 Haz clic en un elemento de la izquierda, luego en su pareja.</p>
+    <div class="match-cols">
+      <div><div class="col-hd">Columna A</div>${leftH}</div>
+      <div><div class="col-hd">Columna B</div>${rightH}</div>
+    </div>`;
+}
+
+function buildOrder(a,id){
+  const shuf=a.items.map((t,oi)=>({t,oi})).sort(()=>Math.random()-.5);
+  window['OD_'+id]={items:shuf,correct:a.correctOrder,exp:a.exp};
+  return `<p class="match-hint">✋ Arrastra los elementos para ordenarlos correctamente.</p>
+    <div class="order-list" id="ol_${id}">
+      ${shuf.map((it,i)=>`<div class="oitem" draggable="true" id="oi_${id}_${i}" data-pos="${i}"
+        ondragstart="dStart('${id}',${i})" ondragover="dOver(event,'${id}',${i})"
+        ondrop="dDrop(event,'${id}',${i})" ondragleave="dLeave('${id}',${i})">
+        <span class="drag-icon">⠿</span>
+        <span class="onum">${i+1}</span>
+        <span>${it.t}</span>
+      </div>`).join('')}
+    </div>
+    <button class="check-btn" id="cbo_${id}" onclick="checkOrder('${id}')">Verificar orden</button>`;
+}
+
+function initMatch(){}
+function initOrder(){}
+
+/* ══════════════════════════════════════════
+   INTERACTIONS
+══════════════════════════════════════════ */
+function clickMC(id,chosen,ans){
+  const ops=document.querySelectorAll(`[id^="op_${id}_"]`);
+  if([...ops].some(o=>o.classList.contains('correct')||o.classList.contains('wrong'))) return;
+  const g=parseInt(id.split('_')[0]);
+  ST.scores[g].tot++;
+  ops.forEach((o,i)=>{
+    if(i===ans) o.classList.add(chosen===ans?'correct':'show-correct');
+    else if(i===chosen) o.classList.add('wrong');
+  });
+  const ok=chosen===ans;
+  const a=getAct(id);
+  showFB(id,ok,a.exp,g);
+  document.getElementById('act_'+id).classList.add(ok?'answered-ok':'answered-err');
+}
+
+function clickTF(id,chosen,ans){
+  const bt=document.getElementById('tf_'+id+'_t');
+  const bf=document.getElementById('tf_'+id+'_f');
+  if(bt.classList.contains('ok-tf')||bt.classList.contains('err-tf')) return;
+  const g=parseInt(id.split('_')[0]);
+  ST.scores[g].tot++;
+  const ok=chosen===ans;
+  (chosen?bt:bf).classList.add(ok?'ok-tf':'err-tf');
+  if(!ok)(ans?bt:bf).classList.add('ok-tf');
+  const a=getAct(id);
+  showFB(id,ok,a.exp,g);
+  document.getElementById('act_'+id).classList.add(ok?'answered-ok':'answered-err');
+}
+
+function useChip(id,ci,w){
+  const chip=document.getElementById('wc_'+id+'_'+ci);
+  if(chip.classList.contains('used')) return;
+  const blanks=document.querySelectorAll(`[id^="bi_${id}_"]`);
+  for(const b of blanks){if(!b.value){b.value=w;chip.classList.add('used');return;}}
+}
+
+function checkFill(id,blanks){
+  const btn=document.getElementById('cbf_'+id);
+  if(btn.disabled) return;
+  btn.disabled=true;
+  const g=parseInt(id.split('_')[0]);
+  ST.scores[g].tot++;
+  let ok=true;
+  blanks.forEach((b,i)=>{
+    const inp=document.getElementById('bi_'+id+'_'+i);
+    const correct=inp.value.trim().toLowerCase()===b.toLowerCase();
+    inp.classList.add(correct?'ok-fill':'err-fill');
+    if(!correct) ok=false;
+  });
+  const a=getAct(id);
+  showFB(id,ok,a.exp,g);
+  document.getElementById('act_'+id).classList.add(ok?'answered-ok':'answered-err');
+}
+
+function pickL(id,i){
+  const md=window['MD_'+id];
+  if(md.pairs.some(p=>p.l===i)) return;
+  document.querySelectorAll(`[id^="ml_${id}_"]`).forEach(e=>e.classList.remove('sel-l'));
+  md.selL=i;
+  document.getElementById('ml_'+id+'_'+i).classList.add('sel-l');
+}
+
+function pickR(id,i){
+  const md=window['MD_'+id];
+  if(md.selL===null) return;
+  if(md.pairs.some(p=>p.r===i)) return;
+  const li=md.selL;
+  const ori=md.rs[i].oi;
+  const ok=md.ans[li]===ori;
+  const lEl=document.getElementById('ml_'+id+'_'+li);
+  const rEl=document.getElementById('mr_'+id+'_'+i);
+  lEl.classList.remove('sel-l');
+  if(ok){
+    lEl.classList.add('paired');
+    rEl.classList.add('paired');
+    md.pairs.push({l:li,r:i});
+    if(md.pairs.length===md.left.length){
+      const g=parseInt(id.split('_')[0]);
+      ST.scores[g].tot++;
+      const a=getAct(id);
+      showFB(id,true,a.exp,g);
+      document.getElementById('act_'+id).classList.add('answered-ok');
+    }
+  } else {
+    rEl.classList.add('wrong-flash');
+    setTimeout(()=>rEl.classList.remove('wrong-flash'),350);
+  }
+  md.selL=null;
+}
+
+let dragSrc={};
+function dStart(id,i){dragSrc[id]=i;document.getElementById('oi_'+id+'_'+i).classList.add('dragging');}
+function dOver(e,id,i){e.preventDefault();document.getElementById('oi_'+id+'_'+i).classList.add('drag-over');}
+function dLeave(id,i){document.getElementById('oi_'+id+'_'+i).classList.remove('drag-over');}
+function dDrop(e,id,i){
+  e.preventDefault();
+  const src=dragSrc[id];
+  if(src===undefined||src===i){document.getElementById('oi_'+id+'_'+i).classList.remove('drag-over');return;}
+  const od=window['OD_'+id];
+  [od.items[src],od.items[i]]=[od.items[i],od.items[src]];
+  const list=document.getElementById('ol_'+id);
+  const children=[...list.children];
+  const srcEl=children[src].cloneNode(true);
+  const tgtEl=children[i].cloneNode(true);
+  list.replaceChild(tgtEl,children[src]);
+  list.replaceChild(srcEl,list.children[i]);
+  [...list.children].forEach((el,idx)=>{
+    el.id='oi_'+id+'_'+idx;
+    el.setAttribute('data-pos',idx);
+    el.querySelector('.onum').textContent=idx+1;
+    el.classList.remove('dragging','drag-over');
+    el.ondragstart=()=>dStart(id,idx);
+    el.ondragover=(ev)=>dOver(ev,id,idx);
+    el.ondrop=(ev)=>dDrop(ev,id,idx);
+    el.ondragleave=()=>dLeave(id,idx);
+  });
+  dragSrc[id]=undefined;
+}
+
+function checkOrder(id){
+  const btn=document.getElementById('cbo_'+id);
+  if(btn.disabled) return;
+  btn.disabled=true;
+  const od=window['OD_'+id];
+  const g=parseInt(id.split('_')[0]);
+  ST.scores[g].tot++;
+  const currentOIs=od.items.map(it=>it.oi);
+  const ok=od.correct.every((c,i)=>c===currentOIs[i]);
+  const list=document.getElementById('ol_'+id);
+  [...list.children].forEach(el=>el.classList.add(ok?'correct-order':'wrong-order'));
+  const a=getAct(id);
+  showFB(id,ok,a.exp,g);
+  document.getElementById('act_'+id).classList.add(ok?'answered-ok':'answered-err');
+}
+
+/* ══════════════════════════════════════════
+   HELPERS
+══════════════════════════════════════════ */
+function showFB(id,ok,exp,g){
+  const fb=document.getElementById('fb_'+id);
+  fb.className=`fb show ${ok?'ok':'err'}`;
+  fb.innerHTML=`<strong>${ok?'¡Correcto! 🎉':'Respuesta incorrecta.'}</strong>${exp}`;
+  if(ok) ST.scores[g].ok++;
+  updateScore(g);
+}
+
+function updateScore(g){
+  const sc=ST.scores[g];
+  document.getElementById('sdisp'+g).textContent=sc.ok;
+  document.getElementById('sb'+g).querySelector('.score-display').innerHTML=
+    `<span id="sdisp${g}">${sc.ok}</span> / ${sc.tot} correctas`;
+  updateRing(g);
+}
+
+function updateRing(g){
+  const sc=ST.scores[g];
+  const pct=sc.tot>0?sc.ok/sc.tot:0;
+  const deg=Math.round(pct*360);
+  const ring=document.getElementById('ring'+g);
+  if(ring){
+    ring.style.background=`conic-gradient(var(--c-${pct>=.7?'green':'blue'}) ${deg}deg, var(--c-border) ${deg}deg)`;
+    document.getElementById('rnum'+g).textContent=sc.tot>0?Math.round(pct*100)+'%':'–';
+  }
+}
+
+function getAct(id){
+  const [g,tid,i]=id.split('_');
+  return D[parseInt(g)].acts[tid][parseInt(i)];
+}
+
+function resetScore(g){
+  ST.scores[g]={ok:0,tot:0};
+  render(g,ST['topic'+g]);
+}
+
+boot();
+</script>
+</body>
+</html>
